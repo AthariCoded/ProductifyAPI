@@ -1,0 +1,7 @@
+{
+  "name": "ProductifyAPI",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/AthariCoded/ProductifyAPI.git",
+  "license": "MIT"
+}
