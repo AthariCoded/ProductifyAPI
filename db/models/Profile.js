@@ -1,11 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   const Profile = sequelize.define("Profile", {
-    image: { type: DataTypes.STRING },
-    bio: {
-      type: DataTypes.TEXT,
-    },
+    
     username: {
       type: DataTypes.STRING,
+    },
+    days: {
+      type: DataTypes.INTEGER,
+    },
+    hours: {
+      type: DataTypes.INTEGER,
     },
   });
 
