@@ -1,15 +1,41 @@
 const express = require("express");
 const cors = require("cors");
 
-//routes
+const bodyParser = require("body-parser");
+
+// routes
+const userRoutes = require("./API/user/routes");
+const taskRoutes = require("./API/task/routes");
 const profileRoutes = require("./API/profile/routes");
 
-//Database
+const passport = require("passport");
+const { localStrategy } = require("./middleware/passport");
+const { jwtStrategy } = require("./middleware/passport");
+
 const app = express();
 const db = require("./db/models/index");
 
-//Middleware
+// Middleware
 app.use(cors());
+app.use(bodyParser.json());
+app.use(passport.initialize());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+
+app.use(userRoutes);
+app.use("/tasks", taskRoutes);
+
+app.use((err, req, res, next) => {
+  res
+    .status(err.status || 500)
+    .json({ message: err.message || "internal Server Error." });
+});
+
+//=========Path Not Found===========\\
+app.use((req, res, next) => {
+  res.status(404).json({ message: "Path not found." });
+});
 
 //=============== Productify Routes ===============\\
 //app.use("/profile", profileRoutes);

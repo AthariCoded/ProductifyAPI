@@ -1,26 +1,53 @@
 module.exports = (sequelize, DataTypes) => {
-    const Task = sequelize.define("Task", {
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: false,
-        validate: {
-          notEmpty: {
-            args: true,
-            msg: "Title is required",
-          },
+  const Task = sequelize.define("Task", {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Task name is required",
         },
       },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: true,
+    },
+    startDate: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Task start date is required",
+        },
       },
-      image: {
-        type: DataTypes.STRING,
-        allowNull: true,
+    },
+    endDate: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Task start date is required",
+        },
       },
-    });
-  
-    return Task;
-  };
-  
+    },
+    hours: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Task start date is required",
+        },
+      },
+    },
+    done: {
+      type: DataTypes.BOOLEAN,
+    },
+  });
+
+  return Task;
+};
