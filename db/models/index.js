@@ -49,7 +49,7 @@ db.Sequelize = Sequelize;
 //   as: "tasks",
 // });
 
-// db.Trip.belongsTo(db.User, {
+// db.Task.belongsTo(db.User, {
 //   as: "user",
 // });
 
