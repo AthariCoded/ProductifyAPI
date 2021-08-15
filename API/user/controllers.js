@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../../db/models");
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../../config/keys");
-exports.signup = async (req, res, next) => {
+
+exports.register = async (req, res, next) => {
   const { password } = req.body;
   const saltRounds = 10;
 
