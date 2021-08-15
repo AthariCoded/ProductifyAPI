@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
+
 const bodyParser = require("body-parser");
 
 // routes
 const userRoutes = require("./API/user/routes");
 const taskRoutes = require("./API/task/routes");
+const profileRoutes = require("./API/profile/routes");
 
 const passport = require("passport");
 const { localStrategy } = require("./middleware/passport");
@@ -20,6 +22,7 @@ app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+
 app.use(userRoutes);
 app.use("/tasks", taskRoutes);
 
@@ -33,6 +36,9 @@ app.use((err, req, res, next) => {
 app.use((req, res, next) => {
   res.status(404).json({ message: "Path not found." });
 });
+
+//=============== Productify Routes ===============\\
+//app.use("/profile", profileRoutes);
 
 const run = async () => {
   try {
