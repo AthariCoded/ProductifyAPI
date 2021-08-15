@@ -4,7 +4,6 @@ const { User, Profile } = require("../../db/models");
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../../config/keys");
 
 exports.register = async (req, res, next) => {
-
   const { password } = req.body;
   const saltRounds = 10;
 
@@ -13,6 +12,7 @@ exports.register = async (req, res, next) => {
     console.log(hashedPassword);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
+    req.body.userId = newUser.id;
     const newProfile = await Profile.create(req.body);
 
     const payload = {
