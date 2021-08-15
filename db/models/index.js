@@ -43,23 +43,23 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.User.hasMany(db.Task, {
-  foreignKey: "userId",
-  allowNull: false,
-  as: "tasks",
-});
+// db.User.hasMany(db.Task, {
+//   foreignKey: "userId",
+//   allowNull: false,
+//   as: "tasks",
+// });
 
-db.Trip.belongsTo(db.User, {
-  as: "user",
-});
+// db.Trip.belongsTo(db.User, {
+//   as: "user",
+// });
 
-db.User.hasOne(db.Profile, {
-  as: "profile",
-  foreignKey: "userId",
-});
+// db.User.hasOne(db.Profile, {
+//   as: "profile",
+//   foreignKey: "userId",
+// });
 
-db.Profile.belongsTo(db.User, {
-  as: "user",
-});
+// db.Profile.belongsTo(db.User, {
+//   as: "user",
+// });
 
 module.exports = db;
