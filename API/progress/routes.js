@@ -18,7 +18,7 @@ router.param("progressId", async (req, res, next, progressId) => {
     req.progress = progress;
     next();
   } else {
-    // give back response 404 Profile Not Found
+    // give back response 404 Progress Not Found
     const error = new Error("Progress Not Found.");
     error.status = 404;
     next(error);
@@ -28,7 +28,7 @@ router.param("progressId", async (req, res, next, progressId) => {
 // List Route
 router.get("/", progressFetch);
 
-//fetch profile
+//fetch progress
 router.get("/:progressId", fetchUserProgress);
 
 // Update Route
