@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 // routes
 const userRoutes = require("./API/user/routes");
 const taskRoutes = require("./API/task/routes");
-const profileRoutes = require("./API/profile/routes");
+const progressRoutes = require("./API/progress/routes");
 
 const passport = require("passport");
 const { localStrategy } = require("./middleware/passport");
@@ -23,7 +23,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 //=============== Productify Routes ===============\\
-app.use("/profiles", profileRoutes);
+app.use("/progress", progressRoutes);
 app.use(userRoutes);
 app.use("/tasks", taskRoutes);
 
