@@ -28,3 +28,18 @@ exports.profileFetch = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.updateProfile = async (req, res, next) => {
+  try {
+    if (req.profile.userId === req.user.id) {
+      const updatedProfile = await req.profile.update(req.body);
+      res.json(updatedProfile);
+    } else {
+      const err = new Error("Unauthorized!");
+      err.status = 401;
+      return next(err);
+    }
+  } catch (error) {
+    next(error);
+  }
+};

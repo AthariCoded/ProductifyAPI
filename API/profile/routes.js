@@ -5,6 +5,7 @@ const {
   profileFetch,
   fetchProfile,
   fetchUserProfile,
+  updateProfile,
 } = require("./controllers");
 const router = express.Router();
 
@@ -29,5 +30,12 @@ router.get("/", profileFetch);
 
 //fetch profile
 router.get("/:profileId", fetchUserProfile);
+
+// Update Route
+router.put(
+  "/:profileId",
+  passport.authenticate("jwt", { session: false }),
+  updateProfile
+);
 
 module.exports = router;
