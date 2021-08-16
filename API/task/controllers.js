@@ -20,3 +20,19 @@ exports.tasksFetch = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.markTask = async (req, res, next) => {
+  try {
+    // if (req.trip.userId === req.user.id) {
+    req.body.done = !req.task.done;
+    const updatedTask = await req.task.update(req.body);
+    res.json(updatedTask);
+    // } else {
+    const err = new Error("Unauthorized!");
+    err.status = 401;
+    return next(err);
+    // }
+  } catch (error) {
+    next(error);
+  }
+};
