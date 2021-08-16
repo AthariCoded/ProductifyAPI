@@ -20,7 +20,7 @@ exports.fetchUserProgress = async (req, res, next) => {
 
 exports.progressFetch = async (req, res, next) => {
   try {
-    const progresses = await Profile.findAll({
+    const progresses = await Progress.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
     res.json(progresses);
