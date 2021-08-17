@@ -11,6 +11,17 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    tag: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Task tag is not required",
+        },
+      },
+    },
     startDate: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -29,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: "Task end date is required",
+          msg: "Task start date is required",
         },
       },
     },
@@ -40,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: "hours is required",
+          msg: "Task start date is required",
         },
       },
     },
