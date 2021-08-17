@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: "Task start date is required",
+          msg: "Task end date is required",
         },
       },
     },
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: "Task start date is required",
+          msg: "hours is required",
         },
       },
     },

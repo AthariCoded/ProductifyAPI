@@ -20,10 +20,22 @@ exports.tasksFetch = async (req, res, next) => {
     next(error);
   }
 };
+exports.createTask = async (req, res, next) => {
+  try {
+    req.body.userId = req.user.id;
+    req.body.done = false;
 
+    const newTask = await Task.create(req.body);
+
+    res.status(201).json(newTask);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
 exports.markTask = async (req, res, next) => {
   try {
-    // if (req.trip.userId === req.user.id) {
+    // if (req.task.userId === req.user.id) {
     req.body.done = !req.task.done;
     const updatedTask = await req.task.update(req.body);
     res.json(updatedTask);

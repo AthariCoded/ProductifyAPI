@@ -50,6 +50,7 @@ db.User.hasMany(db.Task, {
 });
 
 db.Task.belongsTo(db.User, {
+  foreignKey: "userId",
   as: "user",
 });
 
