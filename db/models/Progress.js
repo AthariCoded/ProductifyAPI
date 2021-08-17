@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Profile = sequelize.define("Profile", {
-    
+  const Progress = sequelize.define("Progress", {
     username: {
       type: DataTypes.STRING,
     },
@@ -12,5 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  return Profile;
+  return Progress;
 };
