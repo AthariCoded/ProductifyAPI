@@ -1,10 +1,12 @@
 const express = require("express");
+
 const passport = require("passport");
 const {
   tasksFetch,
   fetchTask,
   createTask,
   markTask,
+   deleteTask
 } = require("./controllers");
 
 const router = express.Router();
@@ -35,5 +37,10 @@ router.put(
   // passport.authenticate("jwt", { session: false }),
   markTask
 );
+//delete task
+router.delete(
+    "/:taskId",
+    passport.authenticate("jwt", { session: false }),
+    deleteTask);
 
 module.exports = router;

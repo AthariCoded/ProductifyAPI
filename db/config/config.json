@@ -1,5 +1,6 @@
 {
   "development": {
+
     "username": "mona",
     "password": null,
     "database": "productify_db",
