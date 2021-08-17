@@ -1,6 +1,6 @@
 const express = require("express");
-const { tasksFetch, fetchTask, markTask } = require("./controllers");
-
+const { tasksFetch, fetchTask, markTask, deleteTask } = require("./controllers");
+const passport = require("passport");
 const router = express.Router();
 
 //=== param middleware (parameter) ====\\
@@ -24,5 +24,10 @@ router.put(
   // passport.authenticate("jwt", { session: false }),
   markTask
 );
+//delete task
+router.delete(
+    "/:taskId",
+    passport.authenticate("jwt", { session: false }),
+    deleteTask);
 
 module.exports = router;
