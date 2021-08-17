@@ -43,6 +43,7 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// user relation with tasks
 db.User.hasMany(db.Task, {
   foreignKey: "userId",
   allowNull: false,
@@ -54,6 +55,7 @@ db.Task.belongsTo(db.User, {
   as: "user",
 });
 
+//user relation with progress
 db.User.hasOne(db.Progress, {
   as: "progress",
   foreignKey: "userId",
@@ -61,6 +63,18 @@ db.User.hasOne(db.Progress, {
 
 db.Progress.belongsTo(db.User, {
   as: "user",
+});
+
+// task relation with checklist
+db.Task.hasMany(db.CheckList, {
+  foreignKey: "taskId",
+  allowNull: false,
+  as: "checklists",
+});
+
+db.CheckList.belongsTo(db.Task, {
+  foreignKey: "taskId",
+  as: "task",
 });
 
 module.exports = db;
