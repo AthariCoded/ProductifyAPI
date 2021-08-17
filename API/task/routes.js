@@ -1,5 +1,11 @@
 const express = require("express");
-const { tasksFetch, fetchTask, markTask } = require("./controllers");
+const passport = require("passport");
+const {
+  tasksFetch,
+  fetchTask,
+  createTask,
+  markTask,
+} = require("./controllers");
 
 const router = express.Router();
 
@@ -18,6 +24,11 @@ router.param("taskId", async (req, res, next, taskId) => {
 
 // List Route
 router.get("/", tasksFetch);
+
+// Add Route
+
+router.post("/", passport.authenticate("jwt", { session: false }), createTask);
+
 // Mark Task Route
 router.put(
   "/mark/:taskId",

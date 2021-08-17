@@ -43,15 +43,16 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// db.User.hasMany(db.Task, {
-//   foreignKey: "userId",
-//   allowNull: false,
-//   as: "tasks",
-// });
+db.User.hasMany(db.Task, {
+  foreignKey: "userId",
+  allowNull: false,
+  as: "tasks",
+});
 
-// db.Task.belongsTo(db.User, {
-//   as: "user",
-// });
+db.Task.belongsTo(db.User, {
+  foreignKey: "userId",
+  as: "user",
+});
 
 db.User.hasOne(db.Progress, {
   as: "progress",
