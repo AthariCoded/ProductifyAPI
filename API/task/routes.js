@@ -6,7 +6,8 @@ const {
   fetchTask,
   createTask,
   markTask,
-   deleteTask
+  deleteTask,
+  updateTask,
 } = require("./controllers");
 
 const router = express.Router();
@@ -28,7 +29,6 @@ router.param("taskId", async (req, res, next, taskId) => {
 router.get("/", tasksFetch);
 
 // Add Route
-
 router.post("/", passport.authenticate("jwt", { session: false }), createTask);
 
 // Mark Task Route
@@ -39,8 +39,17 @@ router.put(
 );
 //delete task
 router.delete(
-    "/:taskId",
-    passport.authenticate("jwt", { session: false }),
-    deleteTask);
+  "/:taskId",
+  passport.authenticate("jwt", { session: false }),
+  deleteTask
+);
+
+// update Route
+router.put(
+  "/:taskId",
+  passport.authenticate("jwt", { session: false }),
+
+  updateTask
+);
 
 module.exports = router;

@@ -48,7 +48,6 @@ exports.markTask = async (req, res, next) => {
     next(error);
   }
 };
-
 exports.deleteTask = async (req, res, next) => {
   try {
     /* The user deleting the trip must be the creator*/ //error with req.user says undef
@@ -59,6 +58,21 @@ exports.deleteTask = async (req, res, next) => {
     }
     await req.task.destroy();
     res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateTask = async (req, res, next) => {
+  try {
+    if (req.task.userId === req.user.id) {
+      const updatedTask = await req.task.update(req.body);
+      res.json(updatedTask);
+    } else {
+      const err = new Error("Unauthorized!");
+      err.status = 401;
+      return next(err);
+    }
   } catch (error) {
     next(error);
   }
