@@ -3,7 +3,7 @@ const express = require("express");
 const passport = require("passport");
 const {
   checklistsFetch,
-  fetchChecklist,
+  fetchTask,
   createChecklist,
   //deleteChecklist,
 } = require("./controllers");
@@ -28,7 +28,7 @@ router.get("/", checklistsFetch);
 
 // Add Route
 router.post(
-  "/taskId",
+  "/:taskId",
   passport.authenticate("jwt", { session: false }),
   createChecklist
 );
