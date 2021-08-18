@@ -55,13 +55,13 @@ db.Task.belongsTo(db.User, {
   as: "user",
 });
 
-//user relation with progress
-db.User.hasOne(db.Progress, {
-  as: "progress",
+//user relation with preference
+db.User.hasOne(db.Preference, {
+  as: "preference",
   foreignKey: "userId",
 });
 
-db.Progress.belongsTo(db.User, {
+db.Preference.belongsTo(db.User, {
   as: "user",
 });
 

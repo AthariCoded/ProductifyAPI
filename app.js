@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 // routes
 const userRoutes = require("./API/user/routes");
 const taskRoutes = require("./API/task/routes");
-const progressRoutes = require("./API/progress/routes");
+const preferenceRoutes = require("./API/preference/routes");
 const checklistRoutes = require("./API/checklist/routes");
 
 const passport = require("passport");
@@ -24,7 +24,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 //=============== Productify Routes ===============\\
-app.use("/progress", progressRoutes);
+app.use("/preference", preferenceRoutes);
 app.use(userRoutes);
 app.use("/tasks", taskRoutes);
 app.use("/checklist", checklistRoutes);
@@ -46,7 +46,6 @@ const run = async () => {
     console.log("Connection to the database successful!");
 
     app.listen(8000, () => {
-
       console.log("The application is running on localhost:8000");
     });
   } catch (error) {
