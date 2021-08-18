@@ -9,10 +9,12 @@ exports.register = async (req, res, next) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(hashedPassword);
+    console.log(hashedPassword); // remove console logs before merging to main
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
     req.body.userId = newUser.id;
+
+    // gonna ignore the progress stuff for now since it'll be redone.
     const newProgress = await Progress.create(req.body);
 
     const payload = {

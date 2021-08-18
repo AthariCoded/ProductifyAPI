@@ -25,9 +25,11 @@ router.param("progressId", async (req, res, next, progressId) => {
   }
 });
 
+// do you need a list route for this?
 // List Route
 router.get("/", progressFetch);
 
+// do you need thie detail fetch route?
 //fetch progress
 router.get("/:progressId", fetchUserProgress);
 
