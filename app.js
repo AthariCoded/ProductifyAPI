@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./API/user/routes");
 const taskRoutes = require("./API/task/routes");
 const progressRoutes = require("./API/progress/routes");
+const checklistRoutes = require("./API/checklist/routes");
 
 const passport = require("passport");
 const { localStrategy } = require("./middleware/passport");
@@ -26,6 +27,7 @@ passport.use(jwtStrategy);
 app.use("/progress", progressRoutes);
 app.use(userRoutes);
 app.use("/tasks", taskRoutes);
+app.use("/checklist", checklistRoutes);
 
 app.use((err, req, res, next) => {
   res
@@ -42,7 +44,9 @@ const run = async () => {
   try {
     await db.sequelize.sync({ alter: true });
     console.log("Connection to the database successful!");
+
     app.listen(8000, () => {
+
       console.log("The application is running on localhost:8000");
     });
   } catch (error) {

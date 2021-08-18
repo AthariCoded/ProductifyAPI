@@ -43,3 +43,9 @@ exports.updateProgress = async (req, res, next) => {
     next(error);
   }
 };
+
+/*
+       const response = await instance.put(`/progress/${updatedProgress.id}`, updatedProgress);
+        for (const key in this.progress)
+        this.progress[key] = response.data[key];
+       */

@@ -48,7 +48,6 @@ exports.markTask = async (req, res, next) => {
     next(error);
   }
 };
-
 exports.deleteTask = async (req, res, next) => {
   try {
     /* The user deleting the trip must be the creator*/ //error with req.user says undef
