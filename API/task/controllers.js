@@ -50,16 +50,31 @@ exports.markTask = async (req, res, next) => {
 };
 
 exports.deleteTask = async (req, res, next) => {
-    try {
-      /* The user deleting the trip must be the creator*/ //error with req.user says undef
-      if (req.user.id !== req.task.userId) {
-        const error = new Error("Unauthorized.");
-        error.status = 401;
-        return next(error);
-      }
-      await req.task.destroy();
-      res.status(204).end();
-    } catch (error) {
-      next(error);
+  try {
+    /* The user deleting the trip must be the creator*/ //error with req.user says undef
+    if (req.user.id !== req.task.userId) {
+      const error = new Error("Unauthorized.");
+      error.status = 401;
+      return next(error);
     }
-  };
+    await req.task.destroy();
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateTask = async (req, res, next) => {
+  try {
+    if (req.task.userId === req.user.id) {
+      const updatedTask = await req.task.update(req.body);
+      res.json(updatedTask);
+    } else {
+      const err = new Error("Unauthorized!");
+      err.status = 401;
+      return next(err);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
