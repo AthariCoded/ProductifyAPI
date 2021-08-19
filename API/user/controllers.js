@@ -34,7 +34,6 @@ exports.login = async (req, res, next) => {
 
   //to get user's corresponding preference
   const userPreference = await user.getPreference();
-
   const payload = {
     id: user.id,
     username: user.username,

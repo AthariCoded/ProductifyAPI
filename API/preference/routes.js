@@ -3,7 +3,7 @@ const passport = require("passport");
 
 const {
   // preferenceFetch,
-  // fetchPreference,
+  fetchPreference,
   // fetchUserPreference,
   updatePreference,
 } = require("./controllers");
