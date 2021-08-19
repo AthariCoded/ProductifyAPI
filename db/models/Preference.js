@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    tueday: {
+    tuesday: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },

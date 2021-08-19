@@ -23,7 +23,8 @@ exports.fetchPreference = async (preferenceId, next) => {
     next(error);
   }
 };
-/*S
+
+/*
 exports.fetchUserPreference = async (req, res, next) => {
   try {
     const preference = await Preference.findByPk(req.preference.id);
