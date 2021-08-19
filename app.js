@@ -24,7 +24,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 //=============== Productify Routes ===============\\
-app.use("/preference", preferenceRoutes);
+app.use("/preferences", preferenceRoutes);
 app.use(userRoutes);
 app.use("/tasks", taskRoutes);
 app.use("/checklist", checklistRoutes);
