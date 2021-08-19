@@ -15,7 +15,6 @@ exports.updatePreference = async (req, res, next) => {
   }
 };
 
-/*
 exports.fetchPreference = async (preferenceId, next) => {
   try {
     const preference = await Preference.findByPk(preferenceId);
@@ -24,7 +23,7 @@ exports.fetchPreference = async (preferenceId, next) => {
     next(error);
   }
 };
-
+/*S
 exports.fetchUserPreference = async (req, res, next) => {
   try {
     const preference = await Preference.findByPk(req.preference.id);
