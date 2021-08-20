@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./API/user/routes");
 const taskRoutes = require("./API/task/routes");
 const preferenceRoutes = require("./API/preference/routes");
-const checklistRoutes = require("./API/checklist/routes");
+//const taskTodoItemRoutes = require("./API/taskTodoItem/routes");
 
 const passport = require("passport");
 const { localStrategy } = require("./middleware/passport");
@@ -27,7 +27,7 @@ passport.use(jwtStrategy);
 app.use("/preferences", preferenceRoutes);
 app.use(userRoutes);
 app.use("/tasks", taskRoutes);
-app.use("/checklist", checklistRoutes);
+//app.use("/checklist", checklistRoutes);
 
 app.use((err, req, res, next) => {
   res
