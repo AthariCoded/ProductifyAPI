@@ -1,4 +1,4 @@
-const { Task } = require("../../db/models");
+const { Task, TaskTodoItem } = require("../../db/models");
 
 exports.fetchTask = async (taskId, next) => {
   try {
@@ -14,6 +14,11 @@ exports.tasksFetch = async (req, res, next) => {
     const tasks = await Task.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
       //   include: { model: User, as: "user", attributes: ["username"] },
+      include: {
+        model: TaskTodoItem,
+        as: "taskTodoItems",
+        attributes: ["id", "text", "done"],
+      },
     });
     res.json(tasks);
   } catch (error) {
@@ -68,6 +73,41 @@ exports.updateTask = async (req, res, next) => {
     if (req.task.userId === req.user.id) {
       const updatedTask = await req.task.update(req.body);
       res.json(updatedTask);
+    } else {
+      const err = new Error("Unauthorized!");
+      err.status = 401;
+      return next(err);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Create a todo item for a task
+exports.createTaskTodoItem = async (req, res, next) => {
+  try {
+    if (req.user.id === req.task.userId) {
+      req.body.taskId = req.task.id;
+      const newTaskTodoItem = await TaskTodoItem.create(req.body);
+      // response: 201 CREATED
+      res.status(201).json(newTaskTodoItem);
+    } else {
+      const err = new Error("Unauthorized|!");
+      err.status = 401;
+      return next(err);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Delete a todo item of a task
+
+exports.deleteTaskTodoItem = async (req, res, next) => {
+  try {
+    if (req.user.id === req.task.userId) {
+      await req.taskTodoItems.destroy();
+      res.status(204).end(); // NO CONTENT
     } else {
       const err = new Error("Unauthorized!");
       err.status = 401;

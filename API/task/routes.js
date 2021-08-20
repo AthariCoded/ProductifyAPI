@@ -8,6 +8,8 @@ const {
   markTask,
   deleteTask,
   updateTask,
+  createTaskTodoItem,
+  deleteTaskTodoItem,
 } = require("./controllers");
 
 const router = express.Router();
@@ -43,13 +45,26 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   deleteTask
 );
-
 // update Route
 router.put(
   "/:taskId",
   passport.authenticate("jwt", { session: false }),
 
   updateTask
+);
+
+// Create task-todo-item Route
+router.post(
+  "/:taskId/taskTodoItems",
+  passport.authenticate("jwt", { session: false }),
+  createTaskTodoItem
+);
+
+// Delete task-todo-item Route
+router.delete(
+  "/:taskId/taskTodoItems/:taskTodoItemId",
+  passport.authenticate("jwt", { session: false }),
+  deleteTaskTodoItem
 );
 
 module.exports = router;

@@ -65,14 +65,14 @@ db.Preference.belongsTo(db.User, {
   as: "user",
 });
 
-// task relation with checklist
-db.Task.hasMany(db.CheckList, {
+// task relation with task-todo-item
+db.Task.hasMany(db.TaskTodoItem, {
   foreignKey: "taskId",
   allowNull: false,
-  as: "checklists",
+  as: "taskTodoItems",
 });
 
-db.CheckList.belongsTo(db.Task, {
+db.TaskTodoItem.belongsTo(db.Task, {
   foreignKey: "taskId",
   as: "task",
 });

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const CheckList = sequelize.define("CheckList", {
+  const TaskTodoItem = sequelize.define("TaskTodoItem", {
     text: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: "CheckList name is required",
+          msg: "Todo name is required",
         },
       },
     },
@@ -16,5 +16,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  return CheckList;
+  return TaskTodoItem;
 };
