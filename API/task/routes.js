@@ -4,6 +4,7 @@ const passport = require("passport");
 const {
   tasksFetch,
   fetchTask,
+  fetchTaskTodoItem,
   createTask,
   markTask,
   deleteTask,
@@ -22,6 +23,19 @@ router.param("taskId", async (req, res, next, taskId) => {
     next();
   } else {
     const error = new Error("Task Not Found.");
+    error.status = 404;
+    next(error);
+  }
+});
+
+//=== param middleware (parameter) ====\\
+router.param("taskTodoItemId", async (req, res, next, taskTodoItemId) => {
+  const taskTodoItem = await fetchTaskTodoItem(taskTodoItemId, next);
+  if (taskTodoItem) {
+    req.taskTodoItem = taskTodoItem;
+    next();
+  } else {
+    const error = new Error("Task Todo Item Not Found.");
     error.status = 404;
     next(error);
   }

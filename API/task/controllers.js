@@ -9,6 +9,16 @@ exports.fetchTask = async (taskId, next) => {
   }
 };
 
+// Fetch a task-todo-item for middleware's parameter
+exports.fetchTaskTodoItem = async (taskTodoItemId, next) => {
+  try {
+    const foundTaskTodoItem = await TaskTodoItem.findByPk(taskTodoItemId);
+    return foundTaskTodoItem;
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.tasksFetch = async (req, res, next) => {
   try {
     const tasks = await Task.findAll({
@@ -102,11 +112,10 @@ exports.createTaskTodoItem = async (req, res, next) => {
 };
 
 // Delete a todo item of a task
-
 exports.deleteTaskTodoItem = async (req, res, next) => {
   try {
     if (req.user.id === req.task.userId) {
-      await req.taskTodoItems.destroy();
+      await req.taskTodoItem.destroy();
       res.status(204).end(); // NO CONTENT
     } else {
       const err = new Error("Unauthorized!");
