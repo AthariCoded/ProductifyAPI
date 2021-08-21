@@ -3,7 +3,9 @@ const express = require("express");
 const passport = require("passport");
 const {
   tasksFetch,
+  userTasksFetch,
   fetchTask,
+  fetchUserTasks,
   fetchTaskTodoItem,
   createTask,
   markTask,
@@ -41,6 +43,19 @@ router.param("taskTodoItemId", async (req, res, next, taskTodoItemId) => {
   }
 });
 
+//=== param middleware (parameter) ====\\
+router.param("userId", async (req, res, next, userId) => {
+  const userTasks = await fetchUserTasks(userId, next);
+  if (userTasks) {
+    req.userTasks = userTasks;
+    next();
+  } else {
+    const error = new Error("User Tasks Not Found.");
+    error.status = 404;
+    next(error);
+  }
+});
+
 // List Route
 router.get("/", tasksFetch);
 
@@ -66,6 +81,9 @@ router.put(
 
   updateTask
 );
+
+//user tasks list
+router.get("/:userId", userTasksFetch);
 
 // Create task-todo-item Route
 router.post(

@@ -9,6 +9,23 @@ exports.fetchTask = async (taskId, next) => {
   }
 };
 
+exports.fetchUserTasks = async (userId, next) => {
+  try {
+    const foundTasks = await Task.findByPk(userId, {
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      //   include: { model: User, as: "user", attributes: ["username"] },
+      include: {
+        model: TaskTodoItem,
+        as: "taskTodoItems",
+        attributes: ["id", "text", "done"],
+      },
+    });
+    return foundTasks;
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Fetch a task-todo-item for middleware's parameter
 exports.fetchTaskTodoItem = async (taskTodoItemId, next) => {
   try {
@@ -88,6 +105,15 @@ exports.updateTask = async (req, res, next) => {
       err.status = 401;
       return next(err);
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+//user Tasks fetch
+exports.userTasksFetch = async (req, res, next) => {
+  try {
+    res.json(req.userTasks);
   } catch (error) {
     next(error);
   }
