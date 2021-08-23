@@ -11,7 +11,10 @@ exports.fetchTask = async (taskId, next) => {
 
 exports.fetchUserTasks = async (userId, next) => {
   try {
-    const foundTasks = await Task.findByPk(userId, {
+    const foundTasks = await Task.findAll({
+      where: {
+        userId: userId,
+      },
       attributes: { exclude: ["createdAt", "updatedAt"] },
       //   include: { model: User, as: "user", attributes: ["username"] },
       include: {
@@ -148,6 +151,22 @@ exports.deleteTaskTodoItem = async (req, res, next) => {
       err.status = 401;
       return next(err);
     }
+  } catch (error) {
+    next(error);
+  }
+};
+// Mark a task-todo-item as done
+exports.markTaskTodoItem = async (req, res, next) => {
+  try {
+    // if (req.task.userId === req.user.id) {
+    req.body.done = !req.taskTodoItem.done;
+    const updatedTaskTodoItem = await req.taskTodoItem.update(req.body);
+    res.json(updatedTaskTodoItem);
+    // } else {
+    const err = new Error("Unauthorized!");
+    err.status = 401;
+    return next(err);
+    // }
   } catch (error) {
     next(error);
   }

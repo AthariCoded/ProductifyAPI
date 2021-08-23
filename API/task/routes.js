@@ -9,6 +9,7 @@ const {
   fetchTaskTodoItem,
   createTask,
   markTask,
+  markTaskTodoItem,
   deleteTask,
   updateTask,
   createTaskTodoItem,
@@ -97,6 +98,13 @@ router.delete(
   "/:taskId/taskTodoItems/:taskTodoItemId",
   passport.authenticate("jwt", { session: false }),
   deleteTaskTodoItem
+);
+
+// Mark task-todo-item Route
+router.put(
+  "/:taskId/taskTodoItems/mark/:taskTodoItemId",
+  // passport.authenticate("jwt", { session: false }),
+  markTaskTodoItem
 );
 
 module.exports = router;
