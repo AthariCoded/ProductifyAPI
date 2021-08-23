@@ -14,6 +14,9 @@ const {
   updateTask,
   createTaskTodoItem,
   deleteTaskTodoItem,
+  createTaskNote,
+  fetchTaskNote,
+  deleteTaskNote,
 } = require("./controllers");
 
 const router = express.Router();
@@ -39,6 +42,19 @@ router.param("taskTodoItemId", async (req, res, next, taskTodoItemId) => {
     next();
   } else {
     const error = new Error("Task Todo Item Not Found.");
+    error.status = 404;
+    next(error);
+  }
+});
+
+//=== param middleware (parameter) ====\\
+router.param("taskNoteId", async (req, res, next, taskNoteId) => {
+  const taskNote = await fetchTaskNote(taskNoteId, next);
+  if (taskNote) {
+    req.taskNote = taskNote;
+    next();
+  } else {
+    const error = new Error("Task Note Not Found.");
     error.status = 404;
     next(error);
   }
@@ -105,6 +121,20 @@ router.put(
   "/:taskId/taskTodoItems/mark/:taskTodoItemId",
   // passport.authenticate("jwt", { session: false }),
   markTaskTodoItem
+);
+
+// Create task-note Route
+router.post(
+  "/:taskId/taskNote",
+  passport.authenticate("jwt", { session: false }),
+  createTaskNote
+);
+
+// Delete task-note Route
+router.delete(
+  "/:taskId/taskNote/:taskNoteId",
+  passport.authenticate("jwt", { session: false }),
+  deleteTaskNote
 );
 
 module.exports = router;
