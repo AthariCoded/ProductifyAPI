@@ -77,4 +77,14 @@ db.TaskTodoItem.belongsTo(db.Task, {
   as: "task",
 });
 
+//Task relation with TaskNote
+db.Task.hasOne(db.TaskNote, {
+  as: "taskNote",
+  foreignKey: "taskId",
+});
+
+db.TaskNote.belongsTo(db.Task, {
+  as: "task",
+});
+
 module.exports = db;
