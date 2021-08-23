@@ -45,6 +45,17 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    time: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Task time is required",
+        },
+      },
+    },
     hours: {
       type: DataTypes.INTEGER,
       allowNull: false,
