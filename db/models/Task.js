@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    //show tag option
     tag: {
       type: DataTypes.STRING,
       allowNull: true,
