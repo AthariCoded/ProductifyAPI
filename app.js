@@ -27,7 +27,7 @@ passport.use(jwtStrategy);
 app.use("/preferences", preferenceRoutes);
 app.use(userRoutes);
 app.use("/tasks", taskRoutes);
-//app.use("/checklist", checklistRoutes);
+//app.use("/checklist", checklistRoutes); would you delete this?
 
 app.use((err, req, res, next) => {
   res
