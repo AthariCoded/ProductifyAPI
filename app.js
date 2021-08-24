@@ -45,7 +45,7 @@ const run = async () => {
     await db.sequelize.sync({ alter: true });
     console.log("Connection to the database successful!");
 
-    app.listen(8000, () => {
+    app.listen(8060, () => {
       console.log("The application is running on localhost:8000");
     });
   } catch (error) {
