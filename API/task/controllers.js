@@ -61,11 +61,18 @@ exports.tasksFetch = async (req, res, next) => {
     const tasks = await Task.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
       //   include: { model: User, as: "user", attributes: ["username"] },
-      include: {
-        model: TaskTodoItem,
-        as: "taskTodoItems",
-        attributes: ["id", "text", "done"],
-      },
+      include: [
+        {
+          model: TaskTodoItem,
+          as: "taskTodoItems",
+          attributes: ["id", "text", "done"],
+        },
+        {
+          model: TaskNote,
+          as: "taskNote",
+          attributes: ["id", "text"],
+        },
+      ],
     });
     res.json(tasks);
   } catch (error) {
