@@ -79,6 +79,7 @@ exports.tasksFetch = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.createTask = async (req, res, next) => {
   try {
     req.body.userId = req.user.id;

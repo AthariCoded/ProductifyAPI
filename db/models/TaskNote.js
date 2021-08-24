@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const TaskNote = sequelize.define("TaskNote", {
     text: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       unique: false,
       validate: {
