@@ -24,7 +24,7 @@ router.param("preferenceId", async (req, res, next, preferenceId) => {
     next(error);
   }
 });
-
+// 👇🏻 if you don't need this delete it please
 // List Route
 //router.get("/", preferenceFetch);
 

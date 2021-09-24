@@ -24,6 +24,7 @@ exports.fetchPreference = async (preferenceId, next) => {
   }
 };
 
+//again if you are not using it delete it
 /*
 exports.fetchUserPreference = async (req, res, next) => {
   try {

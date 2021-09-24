@@ -1,3 +1,9 @@
+// task routes and controllers need defo a refactor! (+148 lines)😢
+/* 
+1. routes and controllers for the *** task ***
+2. routes and controllers for the *** taskNote ***
+3. routes and controllers for the *** taskTodoItem ***
+*/
 const express = require("express");
 
 const passport = require("passport");
@@ -74,7 +80,7 @@ router.param("userId", async (req, res, next, userId) => {
 });
 
 // List Route
-router.get("/", tasksFetch);
+router.get("/", tasksFetch); // hmmm why would you fetch all the tasks?🤔 you only need the user's tasks right?
 
 // Add Route
 router.post("/", passport.authenticate("jwt", { session: false }), createTask);
@@ -110,6 +116,7 @@ router.post(
 );
 
 // Delete task-todo-item Route
+// look how long this that ahhhhhh! told ya need a refactor
 router.delete(
   "/:taskId/taskTodoItems/:taskTodoItemId",
   passport.authenticate("jwt", { session: false }),
